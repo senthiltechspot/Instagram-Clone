@@ -11,7 +11,7 @@ exports.sendOTP = async (req, res) => {
 
     if (!user) {
       // Save OTP in database
-      const user = new User({ email, otp: OTP });
+      const user = new User({ email, otp: OTP, username: Date.now() });
       await user.save();
 
       // Send OTP to user's email
