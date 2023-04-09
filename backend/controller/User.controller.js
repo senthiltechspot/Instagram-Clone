@@ -79,15 +79,21 @@ exports.FollowUser = async (req, res) => {
         .status(400)
         .send({ message: "You cannot Follow Your Own account" });
     }
-    const user1 = await User.findById(req.user.userId);
-    const user2 = await User.findById(req.params.userId);
+    const FromUser = await User.findById(req.user.userId);
+    const ToUser = await User.findById(req.params.userId);
 
-    user1.following.push(req.params.userId);
-    user2.followers.push(req.user.userId);
-    await user1.save();
-    await user2.save();
+    if (FromUser.following.includes(req.params.userId)) {
+      return res.status(200).send({ message: "Invalid Request" });
+    } else if (ToUser.followers.includes(req.user.userId)) {
+      return res.status(200).send({ message: "Invalid Request" });
+    } else {
+      FromUser.following.push(req.params.userId);
+      ToUser.followers.push(req.user.userId);
+      await FromUser.save();
+      await ToUser.save();
+    }
 
-    return res.status(201).send(user1);
+    return res.status(201).send(FromUser);
   } catch (error) {
     console.log(error);
     return res.status(400).send(error.message);
