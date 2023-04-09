@@ -6,6 +6,8 @@ import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import AutoAwesomeMosaicIcon from "@mui/icons-material/AutoAwesomeMosaic";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const NavBar = () => {
   const [value, setValue] = React.useState("home");
@@ -14,7 +16,7 @@ const NavBar = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const token = localStorage.getItem("Token");
+  const token = cookies.get("Token");
   if (token) {
     return (
       <Box>

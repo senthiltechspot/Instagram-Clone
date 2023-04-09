@@ -13,7 +13,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const UserProfileContents = ({ userid }) => {
   const [user, setUser] = useState(null);
@@ -29,7 +30,7 @@ const UserProfileContents = ({ userid }) => {
     setError(false);
     setBackDropOpen(false);
   };
-  let token = localStorage.getItem("Token");
+  let token = cookies.get("Token");
   let decoded = jwt_decode(token);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -37,7 +38,7 @@ const UserProfileContents = ({ userid }) => {
         `${process.env.REACT_APP_API}/api/user/${userid}`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );
@@ -55,7 +56,7 @@ const UserProfileContents = ({ userid }) => {
       method: "post",
       url: `${process.env.REACT_APP_API}/api/user/${userid}/follow`,
       headers: {
-        Authorization: `${localStorage.getItem("Token")}`,
+        Authorization: `${cookies.get("Token")}`,
         "Content-Type": "application/json",
       },
     };

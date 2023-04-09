@@ -1,8 +1,10 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const ProfileHeader = () => {
   const handleLogout = () => {
-    localStorage.removeItem("Token");
+    cookies.remove("Token", { path: "/" });
     window.location.href = "/";
   };
   return (

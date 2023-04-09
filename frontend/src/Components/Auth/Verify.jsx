@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, CardMedia, Grid, Typography } from "@mui/material";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
   const [otp, setOtp] = useState();
@@ -25,7 +27,9 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
       .then((result) => {
         if (!result.data.token) {
         } else {
-          localStorage.setItem("Token", result.data.token);
+          cookies.set("Token", result.data.token, {
+            path: "/",
+          });
           window.location.href = "/";
         }
         setBackDropOpen(false);

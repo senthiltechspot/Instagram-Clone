@@ -17,7 +17,8 @@ import UploadDp from "./UploadDp";
 import axios from "axios";
 import UpdateData from "./UpdateData";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const style = {
   position: "absolute",
   top: "50%",
@@ -38,7 +39,7 @@ const UserProfile = () => {
     setOpen(false);
     setOpenModal(false);
   };
-  let token = localStorage.getItem("Token");
+  let token = cookies.get("Token");
   let decoded = jwt_decode(token);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -46,7 +47,7 @@ const UserProfile = () => {
         `${process.env.REACT_APP_API}/api/user/${decoded.userId}`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );

@@ -22,6 +22,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import HeaderPost from "./HeaderPost";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const UploadImage = () => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
@@ -52,7 +54,7 @@ const UploadImage = () => {
     };
   };
 
-  let token = localStorage.getItem("Token");
+  let token = cookies.get("Token");
   let decoded = jwt_decode(token);
   const UploadApi = (base64img) => {
     const configuration = {

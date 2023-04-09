@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Mediafiles from "./Mediafiles";
 
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 const ImageListGallery = () => {
   const [posts, setPosts] = useState([]);
 
@@ -12,7 +15,7 @@ const ImageListGallery = () => {
         `${process.env.REACT_APP_API}/api/posts`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );

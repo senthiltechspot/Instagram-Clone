@@ -13,6 +13,8 @@ import React, { useEffect, useState } from "react";
 // import { Waypoint } from "react-waypoint";
 import axios from "axios";
 
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const Mediafiles = ({ image, title, id, refresh, setRefresh }) => {
   const [imageFile, setImageFile] = useState(false);
   const [open, setOpen] = useState(false);
@@ -40,7 +42,7 @@ const Mediafiles = ({ image, title, id, refresh, setRefresh }) => {
   }, [image]);
 
   // Handle delete Post
-  let token = localStorage.getItem("Token");
+  let token = cookies.get("Token");
 
   const handleDelete = async (postId) => {
     setopenBackDrop(true);

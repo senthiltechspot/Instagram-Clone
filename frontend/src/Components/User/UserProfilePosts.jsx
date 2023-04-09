@@ -2,6 +2,8 @@ import { Box, ImageList, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Mediafiles from "../AllPost/Mediafiles";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const UserProfilePosts = ({ userid }) => {
   const [posts, setPosts] = useState([]);
@@ -12,7 +14,7 @@ const UserProfilePosts = ({ userid }) => {
         `${process.env.REACT_APP_API}/api/posts`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );

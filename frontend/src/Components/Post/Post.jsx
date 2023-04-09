@@ -24,7 +24,8 @@ import axios from "axios";
 import Comments from "./Comments";
 import { Waypoint } from "react-waypoint";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const style = {
   position: "absolute",
   top: "50%",
@@ -87,7 +88,7 @@ const Post = ({
         `${process.env.REACT_APP_API}/api/user/${userId}`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );
@@ -118,7 +119,7 @@ const Post = ({
         text: text,
       },
       headers: {
-        Authorization: `${localStorage.getItem("Token")}`,
+        Authorization: `${cookies.get("Token")}`,
       },
     };
 
@@ -148,7 +149,7 @@ const Post = ({
       await axios.post(
         `${process.env.REACT_APP_API}/api/posts/${id}/like`,
         {},
-        { headers: { Authorization: `${localStorage.getItem("Token")}` } }
+        { headers: { Authorization: `${cookies.get("Token")}` } }
       );
     } catch (error) {
       setOpensnack(true);

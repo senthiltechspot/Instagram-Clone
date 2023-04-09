@@ -3,6 +3,8 @@ import axios from "axios";
 import { Grid, Typography, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import UserList from "../Components/FollowComps/UserList";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Following = () => {
   const params = useParams();
@@ -14,7 +16,7 @@ const Following = () => {
         `${process.env.REACT_APP_API}/api/user/${params.userid}`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );

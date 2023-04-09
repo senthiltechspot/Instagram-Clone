@@ -2,6 +2,9 @@ import { Avatar, Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 const Comments = ({ comment }) => {
   const [user, setUser] = useState(null);
 
@@ -11,7 +14,7 @@ const Comments = ({ comment }) => {
         `${process.env.REACT_APP_API}/api/user/${comment.userId}`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );

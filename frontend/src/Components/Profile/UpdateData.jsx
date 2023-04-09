@@ -9,7 +9,8 @@ import {
   CircularProgress,
   TextField,
 } from "@mui/material";
-
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const UpdateData = ({ handleClose }) => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ const UpdateData = ({ handleClose }) => {
     setError(false);
     setSucessPost(false);
   };
-  let token = localStorage.getItem("Token");
+  let token = cookies.get("Token");
   const UploadApi = () => {
     const configuration = {
       method: "post",

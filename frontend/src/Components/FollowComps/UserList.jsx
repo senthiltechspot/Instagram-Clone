@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 const UserList = ({ id }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -10,7 +15,7 @@ const UserList = ({ id }) => {
         `${process.env.REACT_APP_API}/api/user/${id}`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );
@@ -20,7 +25,12 @@ const UserList = ({ id }) => {
   }, [id]);
 
   return (
-    <Grid item display="flex" sx={{ padding: "10px", gap: "5px" }}>
+    <Grid
+      item
+      display="flex"
+      sx={{ padding: "10px", gap: "5px" }}
+      onClick={() => navigate(`/user/${id}`)}
+    >
       <Avatar
         sx={{ width: 56, height: 56 }}
         aria-label="recipe"

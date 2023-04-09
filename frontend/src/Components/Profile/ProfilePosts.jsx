@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Mediafiles from "../AllPost/Mediafiles";
-
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const ProfilePosts = () => {
   const [posts, setPosts] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
-  let token = localStorage.getItem("Token");
+  let token = cookies.get("Token");
   let decoded = jwt_decode(token);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,7 +17,7 @@ const ProfilePosts = () => {
         `${process.env.REACT_APP_API}/api/posts`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );

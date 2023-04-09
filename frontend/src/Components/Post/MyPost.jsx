@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import axios from "axios";
 
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 const MyPost = () => {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [isRefresh, setRefresh] = useState(false);
-  // const [imageFile, setImageFile] = useState(false);
-  // const [videoFile, setVideoFile] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -18,7 +19,7 @@ const MyPost = () => {
         `${process.env.REACT_APP_API}/api/posts`,
         {
           headers: {
-            Authorization: `${localStorage.getItem("Token")}`,
+            Authorization: `${cookies.get("Token")}`,
           },
         }
       );
@@ -27,18 +28,6 @@ const MyPost = () => {
     fetchPosts();
     setLoading(false);
   }, [isRefresh]);
-
-  // function getFileExtension(filename) {
-  //   var ext = /^.+\.([^.]+)$/.exec(filename);
-  //   return ext == null ? "" : ext[1];
-  // }
-  // const extension = getFileExtension(image);
-  // if (extension === "jpg" || extension === "png" || extension === "gif") {
-  //   setImageFile(true);
-  // }
-  // if (extension === "wepm" || extension === "mp4") {
-  //   setVideoFile(true);
-  // }
 
   return (
     <Box>
@@ -65,8 +54,6 @@ const MyPost = () => {
                   setRefresh={setRefresh}
                   isRefresh={isRefresh}
                   key={i}
-                  // imageFile={imageFile}
-                  // videoFile={videoFile}
                 />
               ))
             ) : (

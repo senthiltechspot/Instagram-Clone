@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const UploadDp = ({ handleClose }) => {
   const [file, setFile] = useState("");
   const [sucessPost, setSucessPost] = useState(false);
@@ -28,7 +30,7 @@ const UploadDp = ({ handleClose }) => {
     setFile(files);
   }
 
-  let token = localStorage.getItem("Token");
+  let token = cookies.get("Token");
   const UploadApi = (base64img) => {
     const configuration = {
       method: "post",
