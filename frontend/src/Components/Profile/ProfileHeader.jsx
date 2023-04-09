@@ -1,11 +1,14 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 const ProfileHeader = () => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     cookies.remove("Token", { path: "/" });
-    window.location.href = "/";
+    navigate("/")
   };
   return (
     <Grid

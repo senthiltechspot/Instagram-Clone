@@ -92,7 +92,7 @@ const UserProfileContents = ({ userid }) => {
           </Avatar>
           <Typography
             variant="h9"
-            onClick={() => navigate(`/Followers/${decoded.userId}`)}
+            onClick={() => navigate(`/Followers/${userid}`)}
           >
             <Typography variant="h4">
               {user && user.followers.length}
@@ -101,7 +101,7 @@ const UserProfileContents = ({ userid }) => {
           </Typography>
           <Typography
             variant="h9"
-            onClick={() => navigate(`/Following/${decoded.userId}`)}
+            onClick={() => navigate(`/Following/${userid}`)}
           >
             <Typography variant="h4">
               {user && user.following.length}

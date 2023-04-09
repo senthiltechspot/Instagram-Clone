@@ -1,8 +1,8 @@
 import { Box, ImageList, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Mediafiles from "../AllPost/Mediafiles";
 import Cookies from "universal-cookie";
+import UserMediaFileList from "./UserMediaFileList";
 const cookies = new Cookies();
 
 const UserProfilePosts = ({ userid }) => {
@@ -29,8 +29,13 @@ const UserProfilePosts = ({ userid }) => {
       <Typography>My Posts</Typography>
       <ImageList variant="masonry" cols={2} gap={8}>
         {posts
-          ? posts.map((item) => (
-              <Mediafiles image={item.image} title={item.title} id={item._id} />
+          ? posts.map((item, i) => (
+              <UserMediaFileList
+                key={i}
+                image={item.image}
+                title={item.title}
+                id={item._id}
+              />
             ))
           : ""}
       </ImageList>

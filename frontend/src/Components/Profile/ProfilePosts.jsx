@@ -32,8 +32,9 @@ const ProfilePosts = () => {
       <Typography>My Posts</Typography>
       <ImageList variant="masonry" cols={2} gap={8}>
         {posts
-          ? posts.map((item) => (
+          ? posts.map((item, i) => (
               <Mediafiles
+                key={i}
                 image={item.image}
                 title={item.title}
                 id={item._id}

@@ -86,7 +86,7 @@ const UserProfile = () => {
           </Badge>
           <Typography
             variant="h9"
-            onClick={() => navigate(`/Followers/${decoded.userId}`)}
+            onClick={() => navigate(`/Followers/${user ? user.userid : ""}`)}
           >
             <Typography variant="h4">
               {user && user.followers.length}
@@ -95,7 +95,7 @@ const UserProfile = () => {
           </Typography>
           <Typography
             variant="h9"
-            onClick={() => navigate(`/Following/${decoded.userId}`)}
+            onClick={() => navigate(`/Following/${user && user.userid}`)}
           >
             <Typography variant="h4">
               {user && user.following.length}

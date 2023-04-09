@@ -42,7 +42,7 @@ const Followers = () => {
         <Grid item></Grid>
       </Grid>
       {user
-        ? user.followers.map((item) => <UserList id={item} />)
+        ? user.followers.map((item, i) => <UserList key={i} id={item} />)
         : "No Followers"}
     </Box>
   );
