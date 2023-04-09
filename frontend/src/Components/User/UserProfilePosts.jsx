@@ -6,10 +6,7 @@ import Mediafiles from "../AllPost/Mediafiles";
 const UserProfilePosts = ({ userid }) => {
   const [posts, setPosts] = useState([]);
 
-  // let token = localStorage.getItem("Token");
   useEffect(() => {
-    // setLoading(true);
-
     const fetchPosts = async () => {
       const response = await axios.get(
         `${process.env.REACT_APP_API}/api/posts`,
@@ -24,9 +21,7 @@ const UserProfilePosts = ({ userid }) => {
       );
     };
     fetchPosts();
-    // setLoading(false);
   }, [userid]);
-  //   console.log(posts ? posts : "No filer received");
   return (
     <Box sx={{ overflowY: "scroll" }}>
       <Typography>My Posts</Typography>

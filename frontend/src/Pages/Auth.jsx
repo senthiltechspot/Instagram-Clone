@@ -26,12 +26,7 @@ const Auth = () => {
 
   // BackDrop
   const [BackDropOpen, setBackDropOpen] = React.useState(false);
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-  // const handleToggle = () => {
-  //   setOpen(!open);
-  // };
+
   return (
     <Box sx={{ height: "100%" }}>
       {email ? (

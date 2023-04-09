@@ -11,8 +11,6 @@ const ProfilePosts = () => {
   let token = localStorage.getItem("Token");
   let decoded = jwt_decode(token);
   useEffect(() => {
-    // setLoading(true);
-
     const fetchPosts = async () => {
       const response = await axios.get(
         `${process.env.REACT_APP_API}/api/posts`,
@@ -27,9 +25,7 @@ const ProfilePosts = () => {
       );
     };
     fetchPosts();
-    // setLoading(false);
   }, [refresh, decoded.userId]);
-  //   console.log(posts ? posts : "No filer received");
   return (
     <Box sx={{ overflowY: "scroll" }}>
       <Typography>My Posts</Typography>
@@ -44,7 +40,7 @@ const ProfilePosts = () => {
                 setRefresh={setRefresh}
               />
             ))
-          : ""}
+          : "No Post Found"}
       </ImageList>
     </Box>
   );

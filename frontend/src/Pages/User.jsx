@@ -12,7 +12,6 @@ const User = () => {
       <UserProfileHeader />
       <UserProfileContents userid={params.userid} />
       <UserProfilePosts userid={params.userid} />
-      {params.userid}
     </Box>
   );
 };

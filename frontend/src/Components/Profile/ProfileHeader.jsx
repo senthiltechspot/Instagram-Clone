@@ -19,12 +19,6 @@ const ProfileHeader = () => {
         <Typography variant="h5">My Profile</Typography>
       </Grid>
       <Grid item>
-        {/* <IconButton
-          aria-label="add to favorites"
-          onClick={() => navigate("/CreatePost")}
-        >
-          <PostAddIcon />
-        </IconButton> */}
         <Button onClick={() => handleLogout()}>LogOut</Button>
       </Grid>
     </Grid>

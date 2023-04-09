@@ -46,7 +46,6 @@ const UserProfileContents = ({ userid }) => {
       if (response.data.followers.includes(decoded.userId)) {
         setisFollowing(true);
       }
-      console.log("In useffect", response.data.followers);
     };
     fetchPosts();
   }, [userid, opensnack, decoded.userId]);

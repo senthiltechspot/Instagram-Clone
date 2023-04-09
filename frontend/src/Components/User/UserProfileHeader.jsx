@@ -1,10 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 const UserProfileHeader = () => {
-  // const handleLogout = () => {
-  //   localStorage.removeItem("Token");
-  //   window.location.href = "/";
-  // };
   return (
     <Grid
       container
@@ -17,15 +13,6 @@ const UserProfileHeader = () => {
     >
       <Grid item>
         <Typography variant="h5">Profile Page</Typography>
-      </Grid>
-      <Grid item>
-        {/* <IconButton
-          aria-label="add to favorites"
-          onClick={() => navigate("/CreatePost")}
-        >
-          <PostAddIcon />
-        </IconButton> */}
-        {/* <Button onClick={() => handleLogout()}>LogOut</Button> */}
       </Grid>
     </Grid>
   );

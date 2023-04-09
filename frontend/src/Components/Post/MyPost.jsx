@@ -28,7 +28,6 @@ const MyPost = () => {
     setLoading(false);
   }, [isRefresh]);
 
-  console.log(posts ? posts : "not found");
   // function getFileExtension(filename) {
   //   var ext = /^.+\.([^.]+)$/.exec(filename);
   //   return ext == null ? "" : ext[1];

@@ -54,8 +54,6 @@ const UserProfile = () => {
     };
     fetchPosts();
   }, [decoded.userId, open, openModal]);
-  //   console.log(decoded);
-  //   console.log(user ? user : "not user");
   return (
     <Grid container width={"100%"}>
       <Grid item width={"100%"} padding={"10px"}>

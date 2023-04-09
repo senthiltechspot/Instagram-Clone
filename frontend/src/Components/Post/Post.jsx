@@ -61,7 +61,6 @@ const Post = ({
   // Image/Video File
   const videoRef = useRef();
   const [stop, setStop] = useState(false);
-  // const [playing, setPlaying] = useState(false);
   const handleVideo = () => {
     setStop(!stop);
     if (stop === true) {
@@ -111,7 +110,6 @@ const Post = ({
   }, [image, userId]);
 
   // For Comment a Post
-
   const postaComment = (postid) => {
     const configuration = {
       method: "post",
@@ -138,7 +136,6 @@ const Post = ({
   };
 
   // Like a Post
-
   const handleCloseSnack = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -172,11 +169,7 @@ const Post = ({
           </Avatar>
         }
         action={
-          <IconButton
-            aria-label="settings"
-            // onClick={() => handleDelete(id)}
-          >
-            {/* {isdelete ? <Delete /> : <></>} */}
+          <IconButton aria-label="settings">
             <MoreVert />
           </IconButton>
         }
@@ -199,18 +192,15 @@ const Post = ({
       )}
       {videoFile && (
         <Waypoint
-          // onEnter={handleVideo}
           onLeave={handleStopVideo}
         >
           <CardMedia
             onClick={handleVideo}
             sx={{
-              // minWidth: "70vh",
               display: "flex",
               justifyContent: "center",
             }}
             height="20%"
-            // width={"100%"}
             className="video"
           >
             <video ref={videoRef} width={"300px"}>

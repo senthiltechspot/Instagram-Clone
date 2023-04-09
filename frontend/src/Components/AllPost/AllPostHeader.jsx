@@ -14,14 +14,6 @@ const AllPostHeader = () => {
       <Grid item>
         <Typography variant="h5">All Post</Typography>
       </Grid>
-      <Grid item>
-        {/* <IconButton
-          aria-label="add to favorites"
-          onClick={() => navigate("/CreatePost")}
-        >
-          <PostAddIcon />
-        </IconButton> */}
-      </Grid>
     </Grid>
   );
 };

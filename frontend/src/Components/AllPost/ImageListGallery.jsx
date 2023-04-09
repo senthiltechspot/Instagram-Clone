@@ -7,8 +7,6 @@ const ImageListGallery = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    // setLoading(true);
-
     const fetchPosts = async () => {
       const response = await axios.get(
         `${process.env.REACT_APP_API}/api/posts`,
@@ -21,7 +19,6 @@ const ImageListGallery = () => {
       setPosts(response.data.reverse());
     };
     fetchPosts();
-    // setLoading(false);
   }, []);
 
   return (

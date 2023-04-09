@@ -25,20 +25,6 @@ const Mediafiles = ({ image, title, id, refresh, setRefresh }) => {
     setOpen(false);
     setopenBackDrop(false);
   };
-  // const [videoFile, setVideoFile] = useState(false);
-
-  // // Image/Video File
-  // const videoRef = useRef();
-  // const [stop, setStop] = useState(false);
-  // // const [playing, setPlaying] = useState(false);
-  // const handleVideo = () => {
-  //   setStop(!stop);
-  //   if (stop === true) {
-  //     videoRef.current.pause();
-  //   } else {
-  //     videoRef.current.play();
-  //   }
-  // };
   useEffect(() => {
     function getFileExtension(filename) {
       var ext = /^.+\.([^.]+)$/.exec(filename);
@@ -47,10 +33,8 @@ const Mediafiles = ({ image, title, id, refresh, setRefresh }) => {
     const extension = getFileExtension(image);
     if (extension === "jpg" || extension === "png" || extension === "gif") {
       setImageFile(true);
-      // setVideoFile(false);
     }
     if (extension === "webm" || extension === "mp4") {
-      // setVideoFile(true);
       setImageFile(false);
     }
   }, [image]);
@@ -60,12 +44,6 @@ const Mediafiles = ({ image, title, id, refresh, setRefresh }) => {
 
   const handleDelete = async (postId) => {
     setopenBackDrop(true);
-    // await axios.delete(
-    //   `${process.env.REACT_APP_API}/api/posts/${postId}/delete`,
-    //   {},
-    //   { headers: { Authorization: token } }
-    // );
-    console.log("object");
     const configuration = {
       method: "delete",
       url: `${process.env.REACT_APP_API}/api/posts/${postId}/delete`,
@@ -76,7 +54,6 @@ const Mediafiles = ({ image, title, id, refresh, setRefresh }) => {
     };
     axios(configuration)
       .then((res) => {
-        // setSucessPost(true);
         setopenBackDrop(false);
         handleClose();
         setRefresh(!refresh);
@@ -84,9 +61,7 @@ const Mediafiles = ({ image, title, id, refresh, setRefresh }) => {
       .catch((error) => {
         console.log(error);
         setopenBackDrop(false);
-        // setError(true);
       });
-    // setopenBackDrop(false);
   };
 
   return (

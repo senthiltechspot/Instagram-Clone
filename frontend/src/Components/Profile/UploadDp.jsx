@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import axios from "axios";
 const UploadDp = ({ handleClose }) => {
   const [file, setFile] = useState("");
-  //   const [previewSource, setPreviewSource] = useState("");
   const [sucessPost, setSucessPost] = useState(false);
   const [error, setError] = useState(false);
   const [BackDropOpen, setBackDropOpen] = useState(false);
@@ -26,17 +25,8 @@ const UploadDp = ({ handleClose }) => {
   function handleChange(e) {
     console.log(e.target.files);
     const files = e.target.files[0];
-    // previewFile(files);
     setFile(files);
   }
-
-  //   const previewFile = (files) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(files);
-  //     reader.onloadend = () => {
-  //       setPreviewSource(reader.result);
-  //     };
-  //   };
 
   let token = localStorage.getItem("Token");
   const UploadApi = (base64img) => {
@@ -73,8 +63,7 @@ const UploadDp = ({ handleClose }) => {
     };
   };
   return (
-    <div>
-      {" "}
+    <>
       <Box>
         <Box sx={{ padding: "10px" }}>
           <Input type="file" variant={"outlined"} onChange={handleChange} />
@@ -121,7 +110,7 @@ const UploadDp = ({ handleClose }) => {
           <CircularProgress color="inherit" />
         </Backdrop>
       </Box>
-    </div>
+    </>
   );
 };
 

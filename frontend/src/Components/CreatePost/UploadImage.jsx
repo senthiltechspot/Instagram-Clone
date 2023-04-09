@@ -106,7 +106,6 @@ const UploadImage = () => {
         />
       </Box>
       {previewSource && (
-        // <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
         <Card sx={{ marginBottom: 5 }}>
           <CardHeader
             avatar={
@@ -126,7 +125,6 @@ const UploadImage = () => {
                   : "UserName Not Found"
                 : "User Not Found"
             }
-            // subheader={`Posted on: ${date[0]} ${date[1].slice(0, 5)}`}
           />
           <CardMedia
             component="img"
