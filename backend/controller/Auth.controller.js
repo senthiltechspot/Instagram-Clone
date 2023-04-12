@@ -45,7 +45,10 @@ exports.verifyOTP = async (req, res) => {
     } else {
       const token = jwt.sign(
         { userId: user._id, username: user.username, email: user.email },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "10d",
+        }
       );
       res.send({ token });
     }
