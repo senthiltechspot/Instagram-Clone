@@ -11,41 +11,42 @@ const Followers = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/api/user/${params.userid}`,
-        {
-          headers: {
-            Authorization: `${cookies.get("Token")}`,
-          },
-        }
-      );
-      setUser(response.data);
-      console.log(response.data);
-    };
     fetchPosts();
-  }, [params.userid]);
-  return (
-    <Box>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={3}
-        height={"10%"}
-        sx={{ padding: "25px" }}
-      >
-        <Grid item>
-          <Typography variant="h5">Followers Page</Typography>
+  });
+  const fetchPosts = async () => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/api/user/${params.userid}`,
+      {
+        headers: {
+          Authorization: `${cookies.get("Token")}`,
+        },
+      }
+    );
+    setUser(response.data);
+  };
+  if (user) {
+    return (
+      <Box>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={3}
+          height={"10%"}
+          sx={{ padding: "25px" }}
+        >
+          <Grid item>
+            <Typography variant="h5">Followers Page</Typography>
+          </Grid>
+          <Grid item></Grid>
         </Grid>
-        <Grid item></Grid>
-      </Grid>
-      {user
-        ? user.followers.map((item, i) => <UserList key={i} id={item} />)
-        : "No Followers"}
-    </Box>
-  );
+        {user
+          ? user.followers.map((item, i) => <UserList key={i} id={item} />)
+          : "No Followers"}
+      </Box>
+    );
+  }
 };
 
 export default Followers;

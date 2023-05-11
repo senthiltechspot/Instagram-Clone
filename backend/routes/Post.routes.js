@@ -25,5 +25,5 @@ module.exports = (app) => {
   );
 
   // Get Post by id
-  app.get("/api/posts/:postId", PostController.GetAllPosts);
+  app.get("/api/posts/:postId", PostController.GetPostById);
 };

@@ -27,7 +27,7 @@ const Search = () => {
         </SearchBox>
       </Grid>
       <Grid item></Grid>
-      Search user and Post
+      Search user and Post Comming Soon...
     </Grid>
   );
 };

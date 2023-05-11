@@ -1,0 +1,17 @@
+.otp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  min-width: 1.9rem;
+  height: 3rem;
+  margin: 0 5px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Add additional styles as needed */

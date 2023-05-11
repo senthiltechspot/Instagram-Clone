@@ -25,27 +25,29 @@ const Following = () => {
     };
     fetchPosts();
   }, [params.userid]);
-  return (
-    <Box>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={3}
-        height={"10%"}
-        sx={{ padding: "25px" }}
-      >
-        <Grid item>
-          <Typography variant="h5">Following Page</Typography>
+  if (user) {
+    return (
+      <Box>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={3}
+          height={"10%"}
+          sx={{ padding: "25px" }}
+        >
+          <Grid item>
+            <Typography variant="h5">Following Page</Typography>
+          </Grid>
+          <Grid item></Grid>
         </Grid>
-        <Grid item></Grid>
-      </Grid>
-      {user
-        ? user.following.map((item) => <UserList id={item} />)
-        : "No Followers"}
-    </Box>
-  );
+        {user
+          ? user.following.map((item) => <UserList id={item} />)
+          : "No Followers"}
+      </Box>
+    );
+  }
 };
 
 export default Following;

@@ -31,6 +31,7 @@ const UploadImage = () => {
   const [sucessPost, setSucessPost] = useState(false);
   const [error, setError] = useState(false);
   const [BackDropOpen, setBackDropOpen] = useState(false);
+  const [videoFile, setVideoFile] = useState(false);
 
   const handleClosesnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -40,7 +41,18 @@ const UploadImage = () => {
     setSucessPost(false);
   };
   function handleChange(e) {
-    console.log(e.target.files);
+    console.log(e.target.files[0].name);
+    function getFileExtension(filename) {
+      var ext = /^.+\.([^.]+)$/.exec(filename);
+      return ext == null ? "" : ext[1];
+    }
+    const extension = getFileExtension(e.target.files[0].name);
+    if (extension === "jpg" || extension === "png" || extension === "gif") {
+      setVideoFile(false);
+    }
+    if (extension === "webm" || extension === "mp4") {
+      setVideoFile(true);
+    }
     const files = e.target.files[0];
     previewFile(files);
     setFile(files);
@@ -91,6 +103,7 @@ const UploadImage = () => {
       UploadApi(reader.result);
     };
   };
+
   return (
     <Box>
       <HeaderPost handlePostSubmit={handlePostSubmit} />
@@ -129,7 +142,7 @@ const UploadImage = () => {
             }
           />
           <CardMedia
-            component="img"
+            component={videoFile ? "video" : "img"}
             height="20%"
             image={previewSource}
             alt="Image Not Found"

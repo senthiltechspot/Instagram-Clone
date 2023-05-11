@@ -24,9 +24,9 @@ const MyPost = () => {
         }
       );
       setPosts(response.data.reverse());
+      setLoading(false);
     };
     fetchPosts();
-    setLoading(false);
   }, [isRefresh]);
 
   return (
@@ -34,8 +34,7 @@ const MyPost = () => {
       <Box flex={4} p={{ xs: 0, md: 2 }}>
         {loading ? (
           <Stack spacing={1}>
-            {/* <Skeleton variant="text" height={20} /> */}
-            <Skeleton variant="text" height={100} />
+            <Skeleton variant="text" height={20} />
             <Skeleton variant="rectangular" height={300} />
             <Skeleton variant="text" height={50} />
           </Stack>

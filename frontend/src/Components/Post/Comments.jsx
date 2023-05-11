@@ -22,27 +22,28 @@ const Comments = ({ comment }) => {
     };
     fetchPosts();
   });
-  
-  return (
-    <Grid item display="flex" sx={{ padding: "10px", gap: "5px" }}>
-      <Avatar
-        sx={{ width: 56, height: 56 }}
-        aria-label="recipe"
-        src={user ? (user.dpURL ? user.dpURL : "") : ""}
-      >
-        {user ? (user.name ? user.name[0] : "A") : "A"}
-      </Avatar>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography variant="h8" sx={{ fontWeight: "bold" }}>
-          {user ? (user.name ? user.name : "No Username") : "No Username"}
-        </Typography>
-        <Typography variant="h9">- {comment.text}</Typography>
-        <Typography variant="h11">
-          Commented On: {comment.Date.slice(0, 21)}
-        </Typography>
-      </Box>
-    </Grid>
-  );
+  if (user) {
+    return (
+      <Grid item display="flex" sx={{ padding: "10px", gap: "5px" }}>
+        <Avatar
+          sx={{ width: 56, height: 56 }}
+          aria-label="recipe"
+          src={user ? (user.dpURL ? user.dpURL : "") : ""}
+        >
+          {user ? (user.name ? user.name[0] : "A") : "A"}
+        </Avatar>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Typography variant="h8" sx={{ fontWeight: "bold" }}>
+            {user ? (user.name ? user.name : "No Username") : "No Username"}
+          </Typography>
+          <Typography variant="h9">- {comment.text}</Typography>
+          <Typography variant="h11">
+            Commented On: {comment.Date.slice(0, 21)}
+          </Typography>
+        </Box>
+      </Grid>
+    );
+  }
 };
 
 export default Comments;

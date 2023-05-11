@@ -1,16 +1,14 @@
 import React, { useState } from "react";
+import jwt_decode from "jwt-decode";
 import { Button, CardMedia, Grid, Typography } from "@mui/material";
-import { MuiOtpInput } from "mui-one-time-password-input";
+import OtpInput from "react-otp-input";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import "./Verify.css";
 const cookies = new Cookies();
 
 const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
-  const [otp, setOtp] = useState();
-
-  const handleChange = (newValue) => {
-    setOtp(newValue);
-  };
+  const [otp, setOtp] = useState("");
 
   const configuration = {
     method: "post",
@@ -25,9 +23,14 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
     setBackDropOpen(true);
     axios(configuration)
       .then((result) => {
+        console.log(result.data);
         if (!result.data.token) {
         } else {
           cookies.set("Token", result.data.token, {
+            path: "/",
+          });
+          let decoded = jwt_decode(result.data.token)
+          cookies.set("userId", decoded.userId, {
             path: "/",
           });
           window.location.href = "/";
@@ -50,14 +53,18 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
   };
 
   const handleSendOTP = (e) => {
+    setBackDropOpen(true);
+
     axios(configurationsend)
       .then((result) => {
         console.log(result);
         setSucessOTP(true);
+        setBackDropOpen(false);
       })
       .catch((error) => {
         // handleLoginError();
         console.log(error);
+        setBackDropOpen(false);
       });
   };
   return (
@@ -82,12 +89,20 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
         <Typography variant="h6">Enter OTP Send To</Typography>
         <Typography variant="h7">{email}</Typography>
       </Grid>
-      <Grid item sx={{ width: "70%" }}>
-        <MuiOtpInput
-          length={6}
+      <Grid
+        item
+        sx={{
+          width: "70%",
+        }}
+        className="otp-container"
+      >
+        <OtpInput
           value={otp}
-          gap={"3px"}
-          onChange={handleChange}
+          onChange={setOtp}
+          numInputs={6}
+          renderInput={(props) => (
+            <input className="otp-container-input" {...props} type="number" />
+          )}
         />
       </Grid>
       <Grid item>
@@ -96,9 +111,9 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
         </Button>
       </Grid>
       <Grid item>
-        <Typography variant="h8" onClick={() => handleSendOTP()}>
+        <Button variant="h8" onClick={() => handleSendOTP()}>
           Resend OTP
-        </Typography>
+        </Button>
       </Grid>
     </Grid>
   );

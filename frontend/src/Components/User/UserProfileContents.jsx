@@ -8,6 +8,7 @@ import {
   Snackbar,
   Backdrop,
   CircularProgress,
+  Skeleton,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -43,7 +44,6 @@ const UserProfileContents = ({ userid }) => {
         }
       );
       setUser(response.data);
-
       if (response.data.followers.includes(decoded.userId)) {
         setisFollowing(true);
       }
@@ -72,99 +72,157 @@ const UserProfileContents = ({ userid }) => {
         setError(true);
       });
   };
-  return (
-    <Grid container width={"100%"}>
-      <Grid item width={"100%"} padding={"10px"}>
-        <Box
+  if (user) {
+    return (
+      <Grid container width={"100%"}>
+        <Grid item width={"100%"} padding={"10px"}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
+          >
+            <Avatar
+              sx={{ width: 56, height: 56 }}
+              aria-label="recipe"
+              src={user ? (user.dpURL ? user.dpURL : "") : ""}
+            >
+              {user ? (user.name ? user.name[0] : "A") : "A"}
+            </Avatar>
+            <Typography
+              variant="h9"
+              onClick={() => navigate(`/Followers/${userid}`)}
+            >
+              <Typography variant="h4">
+                {user && user.followers.length}
+              </Typography>
+              Followers
+            </Typography>
+            <Typography
+              variant="h9"
+              onClick={() => navigate(`/Following/${userid}`)}
+            >
+              <Typography variant="h4">
+                {user && user.following.length}
+              </Typography>
+              Following
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid
+          item
           sx={{
             display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            paddingLeft: "20px",
+            paddingBottom: "10px",
           }}
+          width={"100%"}
         >
-          <Avatar
-            sx={{ width: 56, height: 56 }}
-            aria-label="recipe"
-            src={user ? (user.dpURL ? user.dpURL : "") : ""}
-          >
-            {user ? (user.name ? user.name[0] : "A") : "A"}
-          </Avatar>
-          <Typography
-            variant="h9"
-            onClick={() => navigate(`/Followers/${userid}`)}
-          >
-            <Typography variant="h4">
-              {user && user.followers.length}
-            </Typography>
-            Followers
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            {user && user.name}
           </Typography>
-          <Typography
-            variant="h9"
-            onClick={() => navigate(`/Following/${userid}`)}
+          <Typography variant="h8">{user && user.about}</Typography>
+        </Grid>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            paddingLeft: "20px",
+          }}
+          width={"100%"}
+        >
+          {!isFollowing ? (
+            <Button variant="outlined" onClick={() => followRequest()}>
+              Follow
+            </Button>
+          ) : (
+            <Button variant="outlined">Following</Button>
+          )}
+        </Grid>
+        <Snackbar
+          open={opensnack}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
           >
-            <Typography variant="h4">
-              {user && user.following.length}
-            </Typography>
-            Following
-          </Typography>
-        </Box>
+            Follow request Sucessfull!
+          </Alert>
+        </Snackbar>
+        <Snackbar open={Error} autoHideDuration={3000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            Unsucessfull Follow request!
+          </Alert>
+        </Snackbar>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={BackDropOpen}
+          onClick={handleClose}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </Grid>
-      <Grid
-        item
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          paddingLeft: "20px",
-          paddingBottom: "10px",
-        }}
-        width={"100%"}
-      >
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-          {user && user.name}
-        </Typography>
-        <Typography variant="h8">{user && user.about}</Typography>
+    );
+  } else {
+    return (
+      <Grid container width={"100%"}>
+        <Grid item width={"100%"} padding={"10px"}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
+          >
+            <Skeleton variant="circular" width={70} height={70} />
+            <Box width={"30vh"}>
+              <Skeleton variant="rectangular" height={50} />
+            </Box>
+          </Box>
+        </Grid>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            paddingLeft: "20px",
+            paddingBottom: "10px",
+          }}
+          width={"100%"}
+        >
+          <Skeleton variant="rectangular" width={"100%"} height={20} />
+          <Skeleton variant="rectangular" width={"100%"} height={20} />
+        </Grid>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            paddingLeft: "20px",
+          }}
+          width={"100%"}
+        >
+          <Skeleton variant="rectangular" width={"20vw"} height={20} />
+        </Grid>
       </Grid>
-      <Grid
-        item
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          paddingLeft: "20px",
-        }}
-        width={"100%"}
-      >
-        {!isFollowing ? (
-          <Button variant="outlined" onClick={() => followRequest()}>
-            Follow
-          </Button>
-        ) : (
-          <Button variant="outlined">Following</Button>
-        )}
-      </Grid>
-      <Snackbar open={opensnack} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Follow request Sucessfull!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={Error} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Unsucessfull Follow request!
-        </Alert>
-      </Snackbar>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={BackDropOpen}
-        onClick={handleClose}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </Grid>
-  );
+    );
+  }
 };
 
 export default UserProfileContents;
