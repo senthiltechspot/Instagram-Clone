@@ -8,6 +8,8 @@ import {
   Button,
   CircularProgress,
   Backdrop,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 // import { Waypoint } from "react-waypoint";
@@ -19,11 +21,17 @@ const Imagefile = ({ image, title, id, refresh, setRefresh }) => {
   const [imageFile, setImageFile] = useState(false);
   const [open, setOpen] = useState(false);
   const [openBackDrop, setopenBackDrop] = useState(false);
+  const [sucess, setSucess] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSucess(false);
     setOpen(false);
     setopenBackDrop(false);
   };
@@ -59,6 +67,7 @@ const Imagefile = ({ image, title, id, refresh, setRefresh }) => {
         setopenBackDrop(false);
         handleClose();
         setRefresh(!refresh);
+        setSucess(!sucess)
       })
       .catch((error) => {
         console.log(error);
@@ -103,6 +112,11 @@ const Imagefile = ({ image, title, id, refresh, setRefresh }) => {
           <CircularProgress color="inherit" />
         </Backdrop>
       </Dialog>
+      <Snackbar open={sucess} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
+          Post Deleted Sucessfully
+        </Alert>
+      </Snackbar>
     </ImageListItem>
   );
 };

@@ -20,7 +20,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box>
+        <Box sx={{ p: 1 }} >
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -108,6 +108,8 @@ const ProfilePosts = () => {
                       image={item.image}
                       title={item.title}
                       id={item._id}
+                      refresh={refresh}
+                      setRefresh={setRefresh}
                     />
                   ))
                 : ""}

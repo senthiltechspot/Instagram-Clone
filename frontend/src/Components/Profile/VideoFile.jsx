@@ -10,6 +10,8 @@ import {
   Backdrop,
   Box,
   Typography,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { Waypoint } from "react-waypoint";
@@ -22,12 +24,17 @@ const VideoFile = ({ image, title, id, refresh, setRefresh }) => {
   const [open, setOpen] = useState(false);
   const [openBackDrop, setopenBackDrop] = useState(false);
   const [videoFile, setVideoFile] = useState(false);
+  const [sucess, setSucess] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSucess(false);
     setOpen(false);
     setopenBackDrop(false);
   };
@@ -78,6 +85,7 @@ const VideoFile = ({ image, title, id, refresh, setRefresh }) => {
       .then((res) => {
         setopenBackDrop(false);
         handleClose();
+        setSucess(!sucess);
         setRefresh(!refresh);
       })
       .catch((error) => {
@@ -131,6 +139,11 @@ const VideoFile = ({ image, title, id, refresh, setRefresh }) => {
           <CircularProgress color="inherit" />
         </Backdrop>
       </Dialog>
+      <Snackbar open={sucess} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
+          Post Deleted Sucessfully
+        </Alert>
+      </Snackbar>
     </ImageListItem>
   );
 };

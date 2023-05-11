@@ -18,7 +18,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box>
+        <Box sx={{ p: 1 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -38,6 +38,7 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+
 const UserProfilePosts = ({ userid }) => {
   const [posts, setPosts] = useState(null);
   const [value, setValue] = useState(0);
@@ -91,6 +92,7 @@ const UserProfilePosts = ({ userid }) => {
                   ))
                 : ""}
             </ImageList>
+            <Box height={"5vh"}></Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
             <ImageList variant="masonry" cols={2} gap={8}>
@@ -105,6 +107,7 @@ const UserProfilePosts = ({ userid }) => {
                   ))
                 : ""}
             </ImageList>
+            <Box height={"5vh"}></Box>
           </TabPanel>
         </Box>
       </Box>

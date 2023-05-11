@@ -2,8 +2,6 @@ import { Box, ImageList, Skeleton, Typography, Tabs, Tab } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Mediafiles from "./Mediafiles";
-
 import Cookies from "universal-cookie";
 import UserMediaFileList from "../User/UserMediaFileList";
 import UserVideoList from "../User/UserVideoList";
@@ -20,7 +18,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box>
+        <Box sx={{ p: 1 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -62,17 +60,6 @@ const ImageListGallery = () => {
     fetchPosts();
   }, []);
 
-  // return (
-  //   <Box sx={{ overflowY: "scroll" }}>
-  //     <ImageList variant="masonry" cols={2} gap={8}>
-  //       {posts
-  //         ? posts.map((item) => (
-  //             <Mediafiles image={item.image} title={item.title} />
-  //           ))
-  //         : ""}
-  //     </ImageList>
-  //   </Box>
-  // );
   if (posts) {
     return (
       <Box sx={{ overflowY: "scroll" }}>
