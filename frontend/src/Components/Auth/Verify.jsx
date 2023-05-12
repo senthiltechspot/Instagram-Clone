@@ -7,7 +7,13 @@ import Cookies from "universal-cookie";
 import "./Verify.css";
 const cookies = new Cookies();
 
-const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
+const Verify = ({
+  email,
+  setErrorOTP,
+  setSucessOTP,
+  setBackDropOpen,
+  setEmail,
+}) => {
   const [otp, setOtp] = useState("");
 
   const configuration = {
@@ -23,13 +29,12 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
     setBackDropOpen(true);
     axios(configuration)
       .then((result) => {
-        console.log(result.data);
         if (!result.data.token) {
         } else {
           cookies.set("Token", result.data.token, {
             path: "/",
           });
-          let decoded = jwt_decode(result.data.token)
+          let decoded = jwt_decode(result.data.token);
           cookies.set("userId", decoded.userId, {
             path: "/",
           });
@@ -57,7 +62,6 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
 
     axios(configurationsend)
       .then((result) => {
-        console.log(result);
         setSucessOTP(true);
         setBackDropOpen(false);
       })
@@ -87,7 +91,14 @@ const Verify = ({ email, setErrorOTP, setSucessOTP, setBackDropOpen }) => {
       </Grid>
       <Grid item>
         <Typography variant="h6">Enter OTP Send To</Typography>
-        <Typography variant="h7">{email}</Typography>
+        <Typography variant="h7">
+          {email}{" ( "}
+          <a href="/" onClic={() => setEmail(null)}>
+            Change Email
+          </a>
+          {" )"}
+
+        </Typography>
       </Grid>
       <Grid
         item

@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Skeleton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -40,6 +40,16 @@ const Comments = ({ comment }) => {
           <Typography variant="h11">
             Commented On: {comment.Date.slice(0, 21)}
           </Typography>
+        </Box>
+      </Grid>
+    );
+  } else {
+    return (
+      <Grid item display="flex" sx={{ padding: "10px", gap: "5px" }}>
+        <Skeleton variant="circular" width={50} height={50} />
+
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Skeleton variant="rectangular" width={"80vw"} height={50} />
         </Box>
       </Grid>
     );

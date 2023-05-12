@@ -62,7 +62,6 @@ const UserProfileContents = ({ userid }) => {
     };
     axios(configuration)
       .then((res) => {
-        console.log(res);
         setOpensnack(true);
         setBackDropOpen(false);
       })

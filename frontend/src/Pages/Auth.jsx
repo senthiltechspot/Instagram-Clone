@@ -35,6 +35,7 @@ const Auth = () => {
           setErrorOTP={setErrorOTP}
           setSucessOTP={setSucessOTP}
           setBackDropOpen={setBackDropOpen}
+          setEmail={setEmail}
         />
       ) : (
         <Login

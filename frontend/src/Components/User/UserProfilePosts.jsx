@@ -57,7 +57,6 @@ const UserProfilePosts = ({ userid }) => {
           },
         }
       );
-      console.log(response.data);
       setPosts(
         response.data.filter((item) => item.userId === userid).reverse()
       );

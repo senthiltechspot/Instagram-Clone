@@ -1,33 +1,35 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Post from "./Post";
+import { useParams } from "react-router-dom";
+import Post from "../Components/Post/Post";
 import axios from "axios";
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
-
-const MyPost = () => {
+const SinglePost = () => {
   const [loading, setLoading] = useState(true);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState();
   const [isRefresh, setRefresh] = useState(false);
+
+  const params = useParams();
 
   useEffect(() => {
     setLoading(true);
-
     const fetchPosts = async () => {
       const response = await axios.get(
-        `${process.env.REACT_APP_API}/api/posts`,
+        `${process.env.REACT_APP_API}/api/posts/${params.postId}`,
         {
           headers: {
             Authorization: `${cookies.get("Token")}`,
           },
         }
       );
-      setPosts(response.data.reverse());
+      setPosts(response.data);
+      document.title = response.data.title;
       setLoading(false);
     };
     fetchPosts();
-  }, [isRefresh]);
+  }, [isRefresh, params]);
 
   return (
     <Box>
@@ -41,20 +43,18 @@ const MyPost = () => {
         ) : (
           <>
             {posts ? (
-              posts.map((post, i) => (
-                <Post
-                  image={post.image}
-                  title={post.title}
-                  likes={post.likes}
-                  comments={post.comments}
-                  id={post._id}
-                  createdAt={post.createdAt}
-                  userId={post.userId}
-                  setRefresh={setRefresh}
-                  isRefresh={isRefresh}
-                  key={i}
-                />
-              ))
+              <Post
+                image={posts.image}
+                title={posts.title}
+                likes={posts.likes}
+                comments={posts.comments}
+                id={posts._id}
+                createdAt={posts.createdAt}
+                userId={posts.userId}
+                setRefresh={setRefresh}
+                isRefresh={isRefresh}
+                key={0}
+              />
             ) : (
               <Stack spacing={1}>
                 <Skeleton variant="text" height={70} />
@@ -65,8 +65,9 @@ const MyPost = () => {
           </>
         )}
       </Box>
+      <Box height={"7vh"}></Box>
     </Box>
   );
 };
 
-export default MyPost;
+export default SinglePost;

@@ -21,7 +21,6 @@ const Following = () => {
         }
       );
       setUser(response.data);
-      console.log(response.data);
     };
     fetchPosts();
   }, [params.userid]);

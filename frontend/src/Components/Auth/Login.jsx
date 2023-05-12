@@ -22,7 +22,6 @@ const Login = ({
     setBackDropOpen(true);
     axios(configuration)
       .then((result) => {
-        console.log(result);
         setEmail(data);
         setSucessOTP(true);
         setBackDropOpen(false);

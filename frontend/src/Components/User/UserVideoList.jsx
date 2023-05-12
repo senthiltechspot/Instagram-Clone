@@ -1,9 +1,10 @@
 import { ImageListItem } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { Waypoint } from "react-waypoint";
-
-const UserVideoList = ({ image, title }) => {
+import { useNavigate } from "react-router-dom";
+const UserVideoList = ({ image, title, id }) => {
   const [videoFile, setVideoFile] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     function getFileExtension(filename) {
@@ -34,7 +35,7 @@ const UserVideoList = ({ image, title }) => {
     videoRef.current.pause();
   };
   return (
-    <ImageListItem key={image}>
+    <ImageListItem key={image} onClick={() => navigate(`/Post/${id}`)}>
       {videoFile && (
         <Waypoint onLeave={handleStopVideo}>
           <video ref={videoRef} width={"100%"} onClick={handleVideo}>

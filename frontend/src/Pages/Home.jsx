@@ -4,6 +4,7 @@ import Header from "../Components/Home/Header";
 import MyPost from "../Components/Post/MyPost";
 
 const Home = () => {
+  document.title = "Home";
   return (
     <Box>
       <Header />

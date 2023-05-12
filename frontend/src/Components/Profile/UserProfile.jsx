@@ -53,6 +53,7 @@ const UserProfile = () => {
         }
       );
       setUser(response.data);
+      document.title = `Profile - ${response.data.name}`;
     };
     fetchPosts();
   }, [decoded.userId, open, openModal]);

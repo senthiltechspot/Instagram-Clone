@@ -20,6 +20,11 @@ const Search = () => {
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
+    if (keyword) {
+      document.title = `Search - ${keyword}`;
+    } else {
+      document.title = `Search `;
+    }
     const fetchPosts = async () => {
       const response = await axios.get(
         `${process.env.REACT_APP_API}/api/posts`,
@@ -43,7 +48,6 @@ const Search = () => {
   const HandleonChange = (event) => {
     setKeyword(event.target.value);
   };
-  console.log(keyword);
   return (
     <Grid
       container

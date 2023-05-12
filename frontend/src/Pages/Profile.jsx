@@ -4,6 +4,8 @@ import ProfileHeader from "../Components/Profile/ProfileHeader";
 import ProfilePosts from "../Components/Profile/ProfilePosts";
 
 const Profile = () => {
+  document.title = "Profile";
+
   return (
     <div>
       <ProfileHeader />

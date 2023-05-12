@@ -25,7 +25,6 @@ const UploadDp = ({ handleClose }) => {
     setSucessPost(false);
   };
   function handleChange(e) {
-    console.log(e.target.files);
     const files = e.target.files[0];
     setFile(files);
   }

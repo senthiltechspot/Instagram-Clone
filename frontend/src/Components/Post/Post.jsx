@@ -26,6 +26,7 @@ import Comments from "./Comments";
 import { Waypoint } from "react-waypoint";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { RWebShare } from "react-web-share";
 
 const cookies = new Cookies();
 const style = {
@@ -82,39 +83,42 @@ const Post = ({
   const LogUser = cookies.get("userId");
 
   let date = createdAt.split("T");
-  useEffect(() => {
-    CheckWeatherIsLiked();
-    fetchPosts();
-  });
-  const CheckWeatherIsLiked = () => {
-    let like = likes.filter((item) => {
-      return item === LogUser;
-    });
 
-    if (like.length > 0) {
-      setIsLiked(true);
-    }
-    const extension = getFileExtension(image);
-    if (extension === "jpg" || extension === "png" || extension === "gif") {
-      setImageFile(true);
-      setVideoFile(false);
-    }
-    if (extension === "webm" || extension === "mp4") {
-      setVideoFile(true);
-      setImageFile(false);
-    }
-  };
-  const fetchPosts = async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/user/${userId}`,
-      {
-        headers: {
-          Authorization: `${cookies.get("Token")}`,
-        },
-      }
-    );
-    setUser(response.data);
-  };
+  useEffect(() => {
+    const FetchUser = async () => {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/api/user/${userId}`,
+        {
+          headers: {
+            Authorization: `${cookies.get("Token")}`,
+          },
+        }
+      );
+      setUser(response.data);
+      const CheckWeatherIsLiked = () => {
+        let like = likes.filter((item) => {
+          return item === LogUser;
+        });
+
+        if (like.length > 0) {
+          setIsLiked(true);
+        }
+        const extension = getFileExtension(image);
+        if (extension === "jpg" || extension === "png" || extension === "gif") {
+          setImageFile(true);
+          setVideoFile(false);
+        }
+        if (extension === "webm" || extension === "mp4") {
+          setVideoFile(true);
+          setImageFile(false);
+        }
+      };
+      CheckWeatherIsLiked();
+    };
+
+    FetchUser();
+  }, [userId, LogUser, image, likes]);
+
   function getFileExtension(filename) {
     var ext = /^.+\.([^.]+)$/.exec(filename);
     return ext == null ? "" : ext[1];
@@ -167,6 +171,7 @@ const Post = ({
       setOpensnack(true);
     }
   };
+
   if (user) {
     return (
       <Card sx={{ marginBottom: 1.5 }}>
@@ -181,9 +186,17 @@ const Post = ({
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
-              <MoreVert />
-            </IconButton>
+            <RWebShare
+              data={{
+                url: `https://ig-clone-senthiltechspot.vercel.app/Post/${id}`,
+                title: `${title}`,
+              }}
+              onClick={() => console.log("shared successfully!")}
+            >
+              <IconButton aria-label="settings">
+                <MoreVert />
+              </IconButton>
+            </RWebShare>
           }
           title={
             user
@@ -234,9 +247,10 @@ const Post = ({
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <Checkbox
+          <IconButton aria-label="add to favorites" 
               onClick={() => handleLike(id)}
+              >
+            <Checkbox
               checked={isliked}
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: "red" }} />}
@@ -247,9 +261,17 @@ const Post = ({
             <ChatIcon />
           </IconButton>
           {comments.length}
-          <IconButton aria-label="share">
-            <Share />
-          </IconButton>
+          <RWebShare
+            data={{
+              url: `https://ig-clone-senthiltechspot.vercel.app/Post/${id}`,
+              title: `${title}`,
+            }}
+            onClick={() => console.log("shared successfully!")}
+          >
+            <IconButton aria-label="share">
+              <Share />
+            </IconButton>
+          </RWebShare>
         </CardActions>
         <Modal
           open={open}
