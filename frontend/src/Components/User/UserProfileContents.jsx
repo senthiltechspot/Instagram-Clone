@@ -15,6 +15,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import PropTypes from "prop-types";
 const cookies = new Cookies();
 
 const UserProfileContents = ({ userid }) => {
@@ -222,6 +223,10 @@ const UserProfileContents = ({ userid }) => {
       </Grid>
     );
   }
+};
+
+UserProfileContents.prototype = {
+  userid: PropTypes.string.isRequired,
 };
 
 export default UserProfileContents;

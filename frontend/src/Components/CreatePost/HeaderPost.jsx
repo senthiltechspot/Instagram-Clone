@@ -1,5 +1,7 @@
 import React from "react";
 import { Button, Grid, Typography } from "@mui/material";
+import PropTypes from "prop-types";
+
 const HeaderPost = ({ handlePostSubmit }) => {
   return (
     <Grid
@@ -26,5 +28,8 @@ const HeaderPost = ({ handlePostSubmit }) => {
     </Grid>
   );
 };
+HeaderPost.prototype={
+  handlePostSubmit: PropTypes.func.isRequired
+}
 
 export default HeaderPost;

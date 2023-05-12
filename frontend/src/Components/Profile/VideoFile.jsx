@@ -17,6 +17,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Waypoint } from "react-waypoint";
 import axios from "axios";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -146,6 +147,14 @@ const VideoFile = ({ image, title, id, refresh, setRefresh }) => {
       </Snackbar>
     </ImageListItem>
   );
+};
+
+VideoFile.prototype = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  refresh: PropTypes.bool.isRequired,
+  setRefresh: PropTypes.func.isRequired,
 };
 
 export default VideoFile;

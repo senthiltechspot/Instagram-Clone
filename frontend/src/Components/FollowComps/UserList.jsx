@@ -10,6 +10,8 @@ import {
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import PropTypes from "prop-types";
+
 const cookies = new Cookies();
 
 const UserList = ({ id }) => {
@@ -62,11 +64,7 @@ const UserList = ({ id }) => {
     );
   } else {
     return (
-      <Grid
-        item
-        display="flex"
-        sx={{ padding: "10px", gap: "5px", }}
-      >
+      <Grid item display="flex" sx={{ padding: "10px", gap: "5px" }}>
         <Skeleton variant="circular" width={50} height={50} />
 
         <Box
@@ -83,6 +81,10 @@ const UserList = ({ id }) => {
       </Grid>
     );
   }
+};
+
+UserList.prototype = {
+  id: PropTypes.string.isRequired,
 };
 
 export default UserList;

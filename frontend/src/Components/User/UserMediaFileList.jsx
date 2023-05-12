@@ -1,5 +1,6 @@
 import { ImageListItem } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const UserMediaFileList = ({ image, title }) => {
   const [imageFile, setImageFile] = useState(false);
@@ -30,6 +31,11 @@ const UserMediaFileList = ({ image, title }) => {
       )}
     </ImageListItem>
   );
+};
+
+UserMediaFileList.prototype = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default UserMediaFileList;

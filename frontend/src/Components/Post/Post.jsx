@@ -20,13 +20,15 @@ import {
 } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Comments from "./Comments";
 import { Waypoint } from "react-waypoint";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { RWebShare } from "react-web-share";
+import PropTypes from "prop-types";
+import jwt_decode from "jwt-decode";
 
 const cookies = new Cookies();
 const style = {
@@ -137,10 +139,16 @@ const Post = ({
       },
     };
 
+    let decoded = jwt_decode(cookies.get("Token"));
+
     const handleComment = (e) => {
       axios(configuration)
         .then((result) => {
-          setRefresh(!isRefresh);
+          comments.push({
+            text: text,
+            Date: Date(),
+            userId: decoded.userId,
+          });
           setText("");
         })
         .catch((error) => {
@@ -149,7 +157,7 @@ const Post = ({
     };
     handleComment();
   };
-
+  
   // Like a Post
   const handleCloseSnack = (event, reason) => {
     if (reason === "clickaway") {
@@ -247,9 +255,10 @@ const Post = ({
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites" 
-              onClick={() => handleLike(id)}
-              >
+          <IconButton
+            aria-label="add to favorites"
+            onClick={() => handleLike(id)}
+          >
             <Checkbox
               checked={isliked}
               icon={<FavoriteBorder />}
@@ -328,12 +337,24 @@ const Post = ({
             severity="info"
             sx={{ width: "100%" }}
           >
-            You've Already Liked The Post!
+            You Already Liked The Post!
           </Alert>
         </Snackbar>
       </Card>
     );
   }
+};
+
+Post.prototype = {
+  id: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  likes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.string).isRequired,
+  createdAt: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  setRefresh: PropTypes.func.isRequired,
+  isRefresh: PropTypes.bool.isRequired,
 };
 
 export default Post;

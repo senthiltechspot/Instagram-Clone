@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 const UploadDp = ({ handleClose }) => {
@@ -113,6 +114,10 @@ const UploadDp = ({ handleClose }) => {
       </Box>
     </>
   );
+};
+
+UploadDp.prototype = {
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default UploadDp;

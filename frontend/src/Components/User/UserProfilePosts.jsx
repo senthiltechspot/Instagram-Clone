@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import UserMediaFileList from "./UserMediaFileList";
 import UserVideoList from "./UserVideoList";
+
 const cookies = new Cookies();
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -124,5 +125,8 @@ const UserProfilePosts = ({ userid }) => {
     );
   }
 };
-
+UserProfilePosts.prototype = {
+  userid : PropTypes.string.isRequired,
+  };
+  
 export default UserProfilePosts;

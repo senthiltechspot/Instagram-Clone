@@ -12,8 +12,8 @@ import {
   Alert,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-// import { Waypoint } from "react-waypoint";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -67,7 +67,7 @@ const Imagefile = ({ image, title, id, refresh, setRefresh }) => {
         setopenBackDrop(false);
         handleClose();
         setRefresh(!refresh);
-        setSucess(!sucess)
+        setSucess(!sucess);
       })
       .catch((error) => {
         console.log(error);
@@ -121,4 +121,11 @@ const Imagefile = ({ image, title, id, refresh, setRefresh }) => {
   );
 };
 
+Imagefile.prototype = {
+  id: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  setRefresh: PropTypes.func.isRequired,
+  refresh: PropTypes.bool.isRequired,
+};
 export default Imagefile;

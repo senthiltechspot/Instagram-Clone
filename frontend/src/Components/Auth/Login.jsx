@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button, CardMedia, Grid, Typography } from "@mui/material";
 import axios from "axios";
+import PropTypes from "prop-types";
+
 const Login = ({
   email,
   setEmail,
@@ -69,6 +71,14 @@ const Login = ({
       </Grid>
     </Grid>
   );
+};
+
+Login.prototype = {
+  email: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setSucessOTP: PropTypes.func.isRequired,
+  setBackDropOpen: PropTypes.func.isRequired,
+  setErrorLogin: PropTypes.func.isRequired,
 };
 
 export default Login;

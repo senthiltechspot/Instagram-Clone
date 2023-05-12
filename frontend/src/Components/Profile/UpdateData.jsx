@@ -9,8 +9,10 @@ import {
   CircularProgress,
   TextField,
 } from "@mui/material";
+import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
+
 const UpdateData = ({ handleClose }) => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -119,6 +121,10 @@ const UpdateData = ({ handleClose }) => {
       </Backdrop>
     </Box>
   );
+};
+
+UpdateData.prototype = {
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default UpdateData;

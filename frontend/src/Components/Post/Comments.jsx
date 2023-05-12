@@ -1,8 +1,9 @@
 import { Avatar, Box, Grid, Skeleton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
 
 const Comments = ({ comment }) => {
@@ -55,5 +56,7 @@ const Comments = ({ comment }) => {
     );
   }
 };
-
+Comments.prototype = {
+  comment: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 export default Comments;

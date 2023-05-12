@@ -2,6 +2,8 @@ import { ImageListItem } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { Waypoint } from "react-waypoint";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+
 const UserVideoList = ({ image, title, id }) => {
   const [videoFile, setVideoFile] = useState(false);
   const navigate = useNavigate();
@@ -45,6 +47,12 @@ const UserVideoList = ({ image, title, id }) => {
       )}
     </ImageListItem>
   );
+};
+
+UserVideoList.prototype = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default UserVideoList;

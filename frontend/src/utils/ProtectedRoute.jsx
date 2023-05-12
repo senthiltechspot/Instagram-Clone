@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import PropTypes from "prop-types";
 const cookies = new Cookies();
 
 const ProtectedRoute = ({ children }) => {
@@ -10,6 +11,13 @@ const ProtectedRoute = ({ children }) => {
   }
 
   return children;
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default ProtectedRoute;

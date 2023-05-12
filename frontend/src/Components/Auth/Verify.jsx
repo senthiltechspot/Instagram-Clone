@@ -4,6 +4,7 @@ import { Button, CardMedia, Grid, Typography } from "@mui/material";
 import OtpInput from "react-otp-input";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import PropTypes from "prop-types";
 import "./Verify.css";
 const cookies = new Cookies();
 
@@ -92,12 +93,12 @@ const Verify = ({
       <Grid item>
         <Typography variant="h6">Enter OTP Send To</Typography>
         <Typography variant="h7">
-          {email}{" ( "}
+          {email}
+          {" ( "}
           <a href="/" onClic={() => setEmail(null)}>
             Change Email
           </a>
           {" )"}
-
         </Typography>
       </Grid>
       <Grid
@@ -129,5 +130,11 @@ const Verify = ({
     </Grid>
   );
 };
-
+Verify.propTypes = {
+  email: PropTypes.string.isRequired,
+  setErrorOTP: PropTypes.func.isRequired,
+  setSucessOTP: PropTypes.func.isRequired,
+  setBackDropOpen: PropTypes.func.isRequired,
+  setEmail: PropTypes.func.isRequired,
+};
 export default Verify;
