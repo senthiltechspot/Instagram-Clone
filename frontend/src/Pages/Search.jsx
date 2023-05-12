@@ -63,7 +63,7 @@ const Search = () => {
         </SearchBox>
       </Grid>
       <Grid item>
-        {posts.length > 0 ? (
+        {keyword ? (
           <Box sx={{ overflowY: "scroll" }}>
             <Box sx={{ width: "100%" }}>
               <Typography variant="h5">Images</Typography>
