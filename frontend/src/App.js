@@ -1,5 +1,5 @@
 import "./App.css";
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./Pages/Auth";
 import Search from "./Pages/Search";
@@ -14,6 +14,7 @@ import Following from "./Pages/Following";
 import SinglePost from "./Pages/SinglePost";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Reels from "./Pages/Reels";
+import NotFound from "./Pages/NotFound";
 function App() {
   return (
     <div className="App">
@@ -64,6 +65,8 @@ function App() {
           <Route exact path="/Post/:postId" element={<SinglePost />} />
           <Route exact path="/Reels" element={<Reels />} />
 
+          {/* Catch-all route for 404 */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

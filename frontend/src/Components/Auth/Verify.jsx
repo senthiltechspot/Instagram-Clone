@@ -28,12 +28,17 @@ const Verify = ({
 
   const handleSubmit = (e) => {
     setBackDropOpen(true);
+    const expirationDays = 7; // Change this to the desired number of days
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + expirationDays);
     axios(configuration)
       .then((result) => {
         if (!result.data.token) {
         } else {
+          localStorage.setItem("Token", result.data.token);
           cookies.set("Token", result.data.token, {
             path: "/",
+            expires: expirationDate,
           });
           let decoded = jwt_decode(result.data.token);
           cookies.set("userId", decoded.userId, {

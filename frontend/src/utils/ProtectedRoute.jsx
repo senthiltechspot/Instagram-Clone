@@ -6,7 +6,8 @@ const cookies = new Cookies();
 
 const ProtectedRoute = ({ children }) => {
   let token = cookies.get("Token");
-  if (!token) {
+  let Token = localStorage.getItem("Token");
+  if (!token && !Token) {
     return <Navigate to="/Auth" replace />;
   }
 
