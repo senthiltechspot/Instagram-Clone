@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import UserMediaFileList from "../User/UserMediaFileList";
 import UserVideoList from "../User/UserVideoList";
+import { useNavigate } from "react-router-dom";
 const cookies = new Cookies();
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,7 +42,7 @@ function a11yProps(index) {
 const ImageListGallery = () => {
   const [posts, setPosts] = useState([]);
   const [value, setValue] = useState(0);
-
+  const navigate = useNavigate();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -72,7 +73,12 @@ const ImageListGallery = () => {
               sx={{ width: "100%" }}
             >
               <Tab label="All Posts" {...a11yProps(0)} sx={{ width: "50%" }} />
-              <Tab label="Videos" {...a11yProps(1)} sx={{ width: "50%" }} />
+              <Tab
+                label="Videos"
+                {...a11yProps(1)}
+                sx={{ width: "50%" }}
+                onClick={() => navigate("/reels")}
+              />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>

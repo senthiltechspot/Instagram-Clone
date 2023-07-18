@@ -21,6 +21,7 @@
     "react-share": "^4.4.1",
     "react-waypoint": "^10.3.0",
     "react-web-share": "^2.0.2",
+    "swiper": "^10.0.4",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },

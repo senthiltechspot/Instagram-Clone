@@ -1,0 +1,51 @@
+/* styles.css */
+.reel-area {
+  position: relative;
+}
+
+.reel-overlay {
+  position: absolute;
+  bottom: 10px; /* Adjust the value as per your requirement */
+  left: 0;
+  width: 85vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px 20px 20px 20px;
+}
+
+.user-profile-img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.follow-btn {
+  background-color: #3897f0;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.like-button {
+  /* display: flex; */
+  /* align-items: center; */
+  color: white;
+  font-size: 16px;
+  /* cursor: pointer; */
+}
+
+.like-button i {
+  margin-right: 5px;
+}

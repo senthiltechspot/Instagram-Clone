@@ -13,6 +13,7 @@ import Followers from "./Pages/Followers";
 import Following from "./Pages/Following";
 import SinglePost from "./Pages/SinglePost";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Reels from "./Pages/Reels";
 function App() {
   return (
     <div className="App">
@@ -61,6 +62,8 @@ function App() {
           <Route exact path="/Followers/:userid" element={<Followers />} />
           <Route exact path="/Following/:userid" element={<Following />} />
           <Route exact path="/Post/:postId" element={<SinglePost />} />
+          <Route exact path="/Reels" element={<Reels />} />
+
         </Routes>
       </BrowserRouter>
     </div>
