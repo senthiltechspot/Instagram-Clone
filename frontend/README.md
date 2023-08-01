@@ -1,3 +1,10 @@
+# Instagram Clone
+
+<h6>
+            © Designed and Developed by
+            <a href="https://github.com/Senthiltechspot"> SenthilTechSpot</a>
+</h6>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
