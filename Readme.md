@@ -14,3 +14,7 @@ Technologies Used
 ![Material UI](https://img.shields.io/static/v1?style=for-the-badge&message=material-ui&color=blue&logo=MUI&logoColor=FFFFFF&label=)
 
 </p>
+ <h6>
+© Designed and Developed by
+<a href="https://github.com/Senthilspot"> Senthilspot</a>
+</h6>
