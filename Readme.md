@@ -16,5 +16,5 @@ Technologies Used
 </p>
  <h6>
 © Designed and Developed by
-<a href="https://github.com/Senthilspot"> Senthilspot</a>
+<a href="https://github.com/SenthilTechSpot"> SenthilTechSpot</a>
 </h6>
