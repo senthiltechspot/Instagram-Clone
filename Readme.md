@@ -4,6 +4,11 @@ Creating a Post such as image/video,
 Like and comments on a Post,
 Send Follow Request to Users
 
+[Live Link](https://ig-clone-senthiltechspot.vercel.app/) 
+
+`https://ig-clone-senthiltechspot.vercel.app/`
+
+
 Technologies Used
 <p align="center">
 
